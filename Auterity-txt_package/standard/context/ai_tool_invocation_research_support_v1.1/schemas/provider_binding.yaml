@@ -1,0 +1,19 @@
+# schemas/provider_binding.yaml
+$schema: "https://json-schema.org/draft/2020-12/schema"
+title: "Provider/Framework Binding Schema"
+type: object
+required: [binding_family, invocation_term]
+properties:
+  binding_family:
+    enum: [openai, anthropic, gemini, bedrock, azure_ai, mistral, cohere, meta_llama, qwen, deepseek, xai, hf_inference, vllm, together, fireworks, openrouter, litellm, lmstudio, ollama, llamacpp, coreweave, nebius, lambda, cerebras, anyscale, zapier, make, n8n, langchain, llamaindex, autogen, crewai, taskweaver, agentos, camel_ai, cursor, kiro, eigent, mcp, a2a, jsonrpc, grpc, openapi, graphql, webgpu, wasm, other]
+  invocation_term: { type: string }
+  schema_dialect: { enum: [json_schema, openapi_subset, provider_specific, none] }
+  tool_choice_modes:
+    type: array
+    items: { enum: [auto, required, named, none, any] }
+  parallel_calls: { type: boolean }
+  streaming: { type: boolean }
+  example_payload_request: { type: object, additionalProperties: true }
+  example_payload_response: { type: object, additionalProperties: true }
+  notes: { type: string }
+  docs_url: { type: string }

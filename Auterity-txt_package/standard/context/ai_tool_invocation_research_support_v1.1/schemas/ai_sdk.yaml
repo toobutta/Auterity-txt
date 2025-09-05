@@ -1,0 +1,12 @@
+# schemas/ai_sdk.yaml
+$schema: "https://json-schema.org/draft/2020-12/schema"
+title: "AI SDK (UI vs RSC) Capture"
+type: object
+properties:
+  variant: { enum: [UI, RSC, other] }
+  tool_definition_shape: { type: object, additionalProperties: true }
+  invocation_pattern: { type: string }
+  streaming_model: { type: string }
+  error_shape: { type: object, additionalProperties: true }
+  interop_notes: { type: string }
+  docs_url: { type: string }

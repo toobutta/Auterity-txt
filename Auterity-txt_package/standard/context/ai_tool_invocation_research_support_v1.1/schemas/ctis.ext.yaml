@@ -1,0 +1,42 @@
+# schemas/ctis.ext.yaml
+$schema: "https://json-schema.org/draft/2020-12/schema"
+title: "CTIS (Canonical Tool Invocation Schema) — Extension"
+type: object
+required: [id, name, version, inputs]
+properties:
+  id: { type: string }
+  name: { type: string }
+  version: { type: string }
+  summary: { type: string }
+  category: { enum: [retrieval, computation, network_io, file_io, database, productivity_connector, actuator_control, orchestration_meta] }
+  permissions_required:
+    type: array
+    items: { type: string }
+  sensitivity: { enum: [low, medium, high] }
+  inputs: { type: object, additionalProperties: true }
+  outputs: { type: object, additionalProperties: true }
+  invocation:
+    type: object
+    properties:
+      supports_parallel: { type: boolean }
+      supports_streaming: { type: boolean }
+      tool_choice_modes:
+        type: array
+        items: { enum: [auto, required, named, none, any] }
+      timeout_ms: { type: integer }
+      retries: { type: integer }
+  error_contract:
+    type: object
+    properties:
+      errors:
+        type: array
+        items:
+          type: object
+          properties:
+            code: { enum: [INVALID_ARGS, SCHEMA_VIOLATION, TIMEOUT, RATE_LIMIT, AUTH, NETWORK, UPSTREAM_5XX, SIDE_EFFECT_BLOCKED, POLICY_DENIED, UNSUPPORTED_FUNCTION, UNKNOWN] }
+            retriable: { type: boolean }
+  observability:
+    type: object
+    properties:
+      trace_ids: { type: boolean }
+      redaction: { type: boolean }

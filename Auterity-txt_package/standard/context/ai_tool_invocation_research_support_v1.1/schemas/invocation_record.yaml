@@ -1,0 +1,28 @@
+# schemas/invocation_record.yaml
+$schema: "https://json-schema.org/draft/2020-12/schema"
+title: "Invocation Record (Trace)"
+type: object
+required: [provider_family, model, invocation_term, tool_name]
+properties:
+  provider_family:
+    enum: [openai, anthropic, gemini, bedrock, azure_ai, mistral, cohere, meta_llama, qwen, deepseek, xai, hf_inference, vllm, together, fireworks, openrouter, litellm, lmstudio, ollama, llamacpp, coreweave, nebius, lambda, cerebras, anyscale, zapier, make, n8n, langchain, llamaindex, autogen, crewai, taskweaver, agentos, camel_ai, cursor, kiro, eigent, mcp, a2a, jsonrpc, grpc, openapi, graphql, webgpu, wasm, other]
+  model: { type: string }
+  invocation_term: { type: string }
+  tool_name: { type: string }
+  args: { type: object, additionalProperties: true }
+  forced_mode: { enum: [auto, required, named, none, any], nullable: true }
+  parallel_group_id: { type: string, nullable: true }
+  streaming_events:
+    type: array
+    items: { enum: [token_delta, tool_call_delta, tool_result_delta, error, cancellation, heartbeat] }
+  latency_ms:
+    type: object
+    properties:
+      model: { type: number }
+      tool: { type: number }
+      total: { type: number }
+  result_status: { enum: [success, error, timeout, canceled] }
+  error_code:
+    enum: [INVALID_ARGS, SCHEMA_VIOLATION, TIMEOUT, RATE_LIMIT, AUTH, NETWORK, UPSTREAM_5XX, SIDE_EFFECT_BLOCKED, POLICY_DENIED, UNSUPPORTED_FUNCTION, UNKNOWN]
+    nullable: true
+  docs_url: { type: string }
