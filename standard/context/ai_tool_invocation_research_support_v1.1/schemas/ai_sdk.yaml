@@ -1,0 +1,16 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+title: "AI SDK"
+type: object
+properties:
+  variant:
+    enum: [UI, RSC, other]
+  tool_definition_shape:
+    type: object
+  invocation_pattern:
+    type: string
+  streaming_model:
+    type: string
+  error_shape:
+    type: object
+  interop_notes:
+    type: string
