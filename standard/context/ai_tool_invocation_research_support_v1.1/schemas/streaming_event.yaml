@@ -1,0 +1,17 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+title: "Streaming Event"
+type: object
+required: [type, timestamp]
+properties:
+  type:
+    enum: [token_delta, tool_call_delta, tool_result_delta, error, cancellation, heartbeat]
+  timestamp:
+    type: string
+  chunk:
+    type: string
+  tool_call_delta:
+    type: object
+  tool_result_delta:
+    type: object
+  error:
+    type: object
